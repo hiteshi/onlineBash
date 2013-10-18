@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<web-app>
+
+	<welcome-file-list>
+		<welcome-file>home</welcome-file>
+	</welcome-file-list>
+	
+	<servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>com.neev.onlinebash.web.HomeServlet</servlet-class>
+    </servlet>
+
+	<servlet-mapping>
+		<servlet-name>HomeServlet</servlet-name>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+        <servlet-name>OutServlet</servlet-name>
+        <servlet-class>com.neev.onlinebash.web.OutServlet</servlet-class>
+    </servlet>
+
+	<servlet-mapping>
+		<servlet-name>OutServlet</servlet-name>
+		<url-pattern>/out</url-pattern>
+	</servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CommandServlet</servlet-name>
+        <servlet-class>com.neev.onlinebash.web.CommandServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CommandServlet</servlet-name>
+        <url-pattern>/command</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>GetCommandServlet</servlet-name>
+        <servlet-class>com.neev.onlinebash.web.GetCommandServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetCommandServlet</servlet-name>
+        <url-pattern>/getCommand</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>GetDirectoryServlet</servlet-name>
+        <servlet-class>com.neev.onlinebash.web.GetDirectoryServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetDirectoryServlet</servlet-name>
+        <url-pattern>/getDirectory</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+		<servlet-name>index</servlet-name>
+		<jsp-file>/index.jsp</jsp-file>
+	</servlet>
+	
+	<servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+
+</web-app>

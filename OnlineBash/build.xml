@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+
+<project name="OnlineBash" default="deploy.tomcat" basedir=".">
+	
+	<property environment="env" />
+	<property name="project-name" value="OnlineBash" />
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="build.classes.dir" value="${basedir}/classes" />
+	<property name="resources.dir" value="${basedir}/resources" />
+	<property name="dist.dir" value="${basedir}/dist" />
+	
+	<property name="tomcat.home" value="${env.TOMCAT_HOME}" />
+	<property name="tomcat.deploy.dir" value="${tomcat.home}/webapps" />
+
+	<!-- =================================================================== -->
+	<!-- Build classpath -->
+	<!-- =================================================================== -->
+	<path id="classpath">
+		<fileset dir="${tomcat.home}/lib">
+			<include name="*.jar" />
+		</fileset>
+		
+		<pathelement path="${build.classes.dir}" />
+	</path>
+
+	<!-- =================================================================== -->
+	<!-- Prepares the build directory                                        -->
+	<!-- =================================================================== -->
+	<target name="prepare">
+		<mkdir dir="${build.classes.dir}" />
+		<mkdir dir="${dist.dir}" />
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Compiles the source code                                            -->
+	<!-- =================================================================== -->
+	<target name="compile" depends="prepare">
+		<javac srcdir="${src.dir}" destdir="${build.classes.dir}">
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+
+	<!-- ===================================================================-->
+	<!-- Build war															-->
+	<!-- ===================================================================-->
+	<target name="build-war" depends="compile">
+		<war destfile="${dist.dir}/${project-name}.war" webxml="${resources.dir}/web.xml">
+			<fileset file="index.jsp" />
+			
+			<!-- <lib dir="${basedir}/lib">
+				<include name="*.jar" />
+			</lib> -->
+			
+			<classes dir="${build.classes.dir}">
+				<include name="com/neev/onlinebash/web/**" />
+			</classes>
+			
+			<zipfileset dir="${basedir}/web" />
+			
+		</war>
+		
+		<!-- <jar destfile="${dist.dir}/${project-name}.jar" basedir="${build.classes.dir}" includes="**/*.class">
+			<manifest>
+				<attribute name="Main-Class" value="${main.class}" />
+			</manifest>
+		</jar> -->
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Cleans up generated stuff                                           -->
+	<!-- =================================================================== -->
+	<target name="clean">
+		<delete dir="${build.classes.dir}" />
+		<delete dir="${dist.dir}" />
+	</target>
+	
+	<!-- =================================================================== -->
+	<!-- run this target if you want to deploy project to TOMCAT -->
+	<!-- =================================================================== -->
+	<target name="deploy.tomcat" depends="build-war">
+		
+		<!-- copy .war to tomcat deployment directory -->
+		<copy file="${dist.dir}/${project-name}.war" todir="${tomcat.deploy.dir}" />
+
+		<echo message="start server if its not running, using command ${tomcat.home}/bin/startup.sh" />
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- run this target if you want to undeploy project from TOMCAT -->
+	<!-- =================================================================== -->
+	<target name="undeploy.tomcat">
+		
+		<!-- delete .war file to tomcat deployment directory -->
+		<delete file="${tomcat.deploy.dir}/${project-name}.war" />
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- run this target if you want to redeploy project to TOMCAT -->
+	<!-- =================================================================== -->
+	<target name="redeploy.tomcat" depends="undeploy.tomcat, clean, deploy.tomcat">
+		<!-- delete .war file from tomcat deployment directory, clean, compile and deploy again -->
+	</target>
+
+</project>

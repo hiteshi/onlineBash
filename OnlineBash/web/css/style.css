@@ -1,0 +1,62 @@
+#container{
+	background-color: #7C145B;
+    border: solid #444;
+    color: #FFFFFF;
+    display: block;
+    font-family: monospace;
+    margin: auto;
+    opacity: 0.9;
+    overflow: auto;
+    text-align: left;
+    
+}
+#icon{
+	float:right;
+	display: inline;
+}
+img{
+	float: right;
+	
+}
+#bar{
+    text-align: center;
+	display: inline;
+}
+#top{
+	background-color: #444;
+    border: solid #444;
+    color: #FFFFFF;
+    display: block;
+    font-family: monospace;
+    overflow: auto;
+} 
+
+.texting{
+	display: inline;
+}
+body{
+	background-image:url("../images/1.jpg");
+}
+#outer {
+	/* 
+	background-repeat:no-repeat; */
+    width: 100%;
+} 
+
+#cmd{
+	border: none;
+    outline: none;
+    color: #fff;
+    font-family: monospace;
+
+    background-color: transparent;
+    font-family: monospace;
+}
+
+#cmd2{
+	border: none;
+    outline: none;
+    color: #fff;
+    font-family: monospace;
+    background-color: transparent;
+}
